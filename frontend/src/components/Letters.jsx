@@ -64,7 +64,7 @@ export function Letters({rightWord}) {
     // document.getElementById('button_backspace').style.backgroundColor = cssVar("--button-color");
     // document.getElementById('button_backspace').style.color = cssVar("--button-text-color");
 
-    let keyColor = cssVar("--bg-color");
+    let keyColor = cssVar("--secondary-bg-color");
     let keyTextColor = cssVar("--text-color");
     const [line, setLine] = useState(1)
     const [state, setState] = useState({
