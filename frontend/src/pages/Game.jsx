@@ -7,13 +7,14 @@ import {cssVar} from "../utils.js";
 
 export function Game() {
     let tg = window.Telegram.WebApp;
-    tg.setBackgroundColor(cssVar("--secondary-bg-color"));
+    tg.setBackgroundColor('secondary_bg_color');
     if (tg.colorScheme === "light") {
         tg.setHeaderColor(cssVar("--button-color"));
     }
     tg.ready();
+    tg.expand();
 
-    let { isPending, isError, data, error } = useQuery({
+    let {isPending, isError, data, error} = useQuery({
         queryKey: ["word"],
         queryFn: () => getTodayWord(),
     });
@@ -22,8 +23,8 @@ export function Game() {
         return <>Возникла ошибка</>
     }
 
-    return <Box >
-        <Title />
+    return <Box>
+        <Title/>
         {!isPending && <Letters rightWord={data}/>}
     </Box>
 }

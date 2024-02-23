@@ -16,7 +16,7 @@ START_MESSAGE = """Добро пожаловать в игру 5 букв (wordl
 для быстрого создания сервисов в телеграм с использованием webapp.
 
 Разработчик: [@keskiy](https://t.me/keskiy)
-Код: [https://github.com/genchik1/wordle-on-telegram](https://github.com/genchik1/wordle-on-telegram)
+Код: [https://github.com/genchik1...](https://github.com/genchik1/wordle-on-telegram)
 """
 
 

@@ -59,6 +59,7 @@ function FormRow({backgroundColor, textColor, state, line}) {
 
 
 export function Letters({rightWord}) {
+    let tg = window.Telegram.WebApp;
     let keyColor = cssVar("--secondary-bg-color");
     let keyTextColor = cssVar("--text-color");
     const [line, setLine] = useState(1)
