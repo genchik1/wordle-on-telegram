@@ -1,14 +1,14 @@
 :root {
-  --text-color: #000000;
-  --bg-color: #cfcfcf;
-  --secondary-bg-color: #fffdfd;
-  --hint-color: #B4B4B4;
-  --link-color: #4747f5;
-  --button-color: #56A8D3;
-  --header-bg-color: #517B94;
-  --button-text-color: #fff;
-  --error-text-color: #ad0909;
-  /* --text-color: var(--tg-theme-text-color);
+  /*--text-color: #000000;*/
+  /*--bg-color: #cfcfcf;*/
+  /*--secondary-bg-color: #fffdfd;*/
+  /*--hint-color: #B4B4B4;*/
+  /*--link-color: #4747f5;*/
+  /*--button-color: #56A8D3;*/
+  /*--header-bg-color: #517B94;*/
+  /*--button-text-color: #fff;*/
+  /*--error-text-color: #ad0909;*/
+  --text-color: var(--tg-theme-text-color);
   --bg-color: var(--tg-theme-bg-color);
   --secondary-bg-color: var(--tg-theme-secondary-bg-color);
   --hint-color: var(--tg-theme-hint-color);
@@ -16,7 +16,7 @@
   --button-color: var(--tg-theme-button-color);
   --header-bg-color: var(--tg-theme-header-bg-color);
   --button-text-color: var(--tg-theme-button-text-color);
-  --error-text-color: var(--tg-theme-destructive-text-color); */
+  --error-text-color: var(--tg-theme-destructive-text-color);
 }
 
 .body {
