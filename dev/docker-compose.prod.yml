@@ -1,0 +1,67 @@
+version: '2.2'
+
+services:
+  wordle_bot:
+    build:
+      context: ..
+      dockerfile: Dockerfile.prod
+    command: bash -c "alembic upgrade head && python bot.py"
+    container_name: wordle_bot
+    restart: unless-stopped
+    depends_on:
+      - wordle_db
+    environment:
+      - POETRY_GROUP=dev
+    volumes:
+      - ../src:/code
+    env_file:
+      - ../.env
+
+  wordle_api:
+    build:
+      context: ..
+      dockerfile: Dockerfile.prod
+    command: bash -c "gunicorn app:app_ --workers 1 --worker-class worker.GrooluUvicornWorker --bind 0.0.0.0:8011"
+    container_name: wordle_api
+    restart: unless-stopped
+    ports:
+      - '8011:8011'
+    depends_on:
+      - wordle_db
+    environment:
+      - POETRY_GROUP='main'
+    volumes:
+      - ../src:/code
+    env_file:
+      - ../.env
+
+  wordle_db:
+    build:
+      context: ./dockerfiles/postgresql
+    restart: unless-stopped
+    container_name: wordle_db
+    cpu_count: 1
+    cpu_percent: 50
+    mem_limit: 512m
+    volumes:
+      - wordle-data:/var/lib/postgresql/data
+    env_file:
+      - ../.env
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-d", "wordle_db", "-U", "postgres", "-h", "localhost" ]
+      timeout: 10s
+      retries: 5
+
+  wordle_front:
+    build:
+      context: ../frontend/
+      dockerfile: Dockerfile.prod
+    container_name: wordle_front
+    restart: unless-stopped
+    ports:
+      - '3011:80'
+    volumes:
+      - /app/node_modules
+
+volumes:
+  wordle-data:

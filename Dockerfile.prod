@@ -1,0 +1,25 @@
+FROM python:3.11.8-slim-bookworm
+
+ARG SOURCES_DIR="src/"
+ARG POETRY_VERSION=1.7.1
+
+ENV PROJECT_VERSION=1.0.0
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
+
+RUN set -ex apt-get update
+COPY pyproject.toml poetry.lock ./
+ARG POETRY_GROUP=main
+RUN set -ex \
+    && pip install --upgrade pip \
+    && pip install "poetry==$POETRY_VERSION" \
+    && pip install setuptools==69.1.0 \
+    && poetry config virtualenvs.create false \
+    && poetry install --no-root --no-interaction $(bash -c "if [ $POETRY_GROUP == 'dev' ]; then echo '--dev'; elif [ $POETRY_GROUP == 'web' ]; then echo '--only web';else echo '--only main'; fi}") \
+    && rm -rf /root/.cache
+
+WORKDIR /code
+
+COPY ${SOURCES_DIR} /code/
+COPY data/words.json /data/words.json

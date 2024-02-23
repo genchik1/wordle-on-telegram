@@ -1,0 +1,54 @@
+version: '2.2'
+
+services:
+  wordle_bot:
+    build: ..
+    command: bash -c "nodemon bot.py"
+    container_name: wordle_bot
+    restart: unless-stopped
+    depends_on:
+      - wordle_db
+    environment:
+      - POETRY_GROUP=dev
+    volumes:
+      - ../src:/code
+    env_file:
+      - ../.env.dev
+
+  wordle_api:
+    build: ..
+    command: bash -c "uvicorn app:app_ --host 0.0.0.0 --port 8011 --reload --workers 1"
+    container_name: wordle_api
+    restart: unless-stopped
+    ports:
+      - '8011:8011'
+    depends_on:
+      - wordle_db
+    environment:
+      - POETRY_GROUP='main'
+    volumes:
+      - ../src:/code
+    env_file:
+      - ../.env.dev
+
+  wordle_db:
+    build:
+      context: ./dockerfiles/postgresql
+    restart: unless-stopped
+    container_name: wordle_db
+    cpu_count: 1
+    cpu_percent: 50
+    mem_limit: 512m
+    ports:
+      - '5432:5432'
+    volumes:
+      - wordle-data:/var/lib/postgresql/data
+    env_file:
+      - ../.env.dev
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-d", "wordle_db", "-U", "postgres", "-h", "localhost" ]
+      timeout: 10s
+      retries: 5
+
+volumes:
+  wordle-data:
