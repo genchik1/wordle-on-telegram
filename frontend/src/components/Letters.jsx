@@ -13,6 +13,7 @@ function BoxKey({id, backgroundColor, textColor, child}) {
         height: "46px",
         width: "46px",
         fontSize: 20,
+        borderColor: cssVar('--button-color'),
     }}>
         <Typography
             variant='h6'
@@ -58,12 +59,6 @@ function FormRow({backgroundColor, textColor, state, line}) {
 
 
 export function Letters({rightWord}) {
-    // document.getElementById('button_enter').style.backgroundColor = cssVar("--button-color");
-    // document.getElementById('button_enter').style.color = cssVar("--button-text-color");
-    // document.getElementById('button_enter').style.width = "58px";
-    // document.getElementById('button_backspace').style.backgroundColor = cssVar("--button-color");
-    // document.getElementById('button_backspace').style.color = cssVar("--button-text-color");
-
     let keyColor = cssVar("--secondary-bg-color");
     let keyTextColor = cssVar("--text-color");
     const [line, setLine] = useState(1)
@@ -77,6 +72,12 @@ export function Letters({rightWord}) {
     });
 
     const handleClick = (dataKey) => {
+        document.getElementById('button_enter').style.backgroundColor = cssVar("--button-color");
+        document.getElementById('button_enter').style.color = cssVar("--button-text-color");
+        document.getElementById('button_enter').style.width = "58px";
+        document.getElementById('button_backspace').style.backgroundColor = cssVar("--button-color");
+        document.getElementById('button_backspace').style.color = cssVar("--button-text-color");
+
         switch (dataKey) {
             case 'backspace': {
                 if (state[line].length > 0) {
@@ -118,8 +119,10 @@ export function Letters({rightWord}) {
                         }
                     }
                     if (correctLetters === 5) {
+                        tg.HapticFeedback.notificationOccurred("success");
                         setLine(1);
                     } else {
+                        tg.HapticFeedback.notificationOccurred("error");
                         setLine(line + 1);
                     }
                 }
@@ -133,7 +136,7 @@ export function Letters({rightWord}) {
             }
         }
     };
-    let style={textAlign: "center", justifyContent: "center", alignItems: "center"}
+    let style = {textAlign: "center", justifyContent: "center", alignItems: "center"}
     return (
         <Grid sx={{flexGrow: 1}} container>
             <Grid container spacing={1} justifyContent="center" sx={{marginLeft: "-30px"}}>
@@ -196,7 +199,7 @@ export function Letters({rightWord}) {
                                 key={item.id}
                                 sx={{
                                     backgroundColor: keyColor, color: keyTextColor,
-                                    height: "30px", minWidth: "24px", fontSize: 9,
+                                    height: "30px", minWidth: "24px", fontSize: 10,
                                     fontWeight: "bold"
                                 }}
                                 onClick={() => handleClick(item.attribute)}

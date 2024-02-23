@@ -6,18 +6,22 @@
 
 (пока в разработке)
 
+---
+
 ### Стек
 
 - Backend
-  - Python3.11 
-  - Fastapi
-  - Asyncpg + Sqlalchemy + Alembic
-  - Sqladmin
+  - Python3.11 (Fastapi, Sqladmin)
+  - Postgresql (Asyncpg + Sqlalchemy + Alembic)
   - Aiogram
 - Frontend
-  - React
-  - Vite
+  - React + Vite
 - Docker
+
+
+Документация [Telegram Mini Apps](https://core.telegram.org/bots/webapps)
+
+---
 
 ### Разработка
 

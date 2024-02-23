@@ -3,8 +3,16 @@ import {Letters} from "../components/Letters.jsx";
 import {getTodayWord} from "../api/WordsAPI.jsx";
 import {useQuery} from "@tanstack/react-query";
 import {Title} from "../components/Title.jsx";
+import {cssVar} from "../utils.js";
 
 export function Game() {
+    let tg = window.Telegram.WebApp;
+    tg.setBackgroundColor(cssVar("--secondary-bg-color"));
+    if (tg.colorScheme === "light") {
+        tg.setHeaderColor(cssVar("--button-color"));
+    }
+    tg.ready();
+
     let { isPending, isError, data, error } = useQuery({
         queryKey: ["word"],
         queryFn: () => getTodayWord(),
