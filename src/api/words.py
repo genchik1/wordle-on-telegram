@@ -46,10 +46,11 @@ async def get_user_words(
     smtm = await session.execute(get_user_word_m2m_qs(user_id))
     instance = smtm.scalar_one_or_none()
     result = {}
-    for index in range(1, 7):
-        try:
-            result[index] = instance.words[index - 1]
-        except IndexError:
-            result[index] = []
+    if instance is not None:
+        for index in range(1, 7):
+            try:
+                result[index] = instance.words[index - 1]
+            except IndexError:
+                result[index] = []
 
     return result
