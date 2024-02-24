@@ -2,6 +2,7 @@ import {cssVar} from "../utils.js";
 import {Box, Button, Grid, Typography} from "@mui/material";
 import {useState} from "react";
 import {keys} from "../data/keys.js";
+import {checkWord, getUserWords} from "../api/WordsAPI.jsx";
 
 
 function BoxKey({id, backgroundColor, textColor, child}) {
@@ -63,6 +64,7 @@ export function Letters({rightWord}) {
     let keyColor = cssVar("--secondary-bg-color");
     let keyTextColor = cssVar("--text-color");
     const [line, setLine] = useState(1)
+    const [isGet, setIsGet] = useState(false);
     const [state, setState] = useState({
         1: [],
         2: [],
@@ -71,6 +73,20 @@ export function Letters({rightWord}) {
         5: [],
         6: [],
     });
+
+    if (!isGet) {
+        getUserWords().then(result => {
+            setState(result);
+            setIsGet(true);
+            for (let i = 1; i < 7; i++) {
+                console.log(result[i], result[i].length);
+                if (result[i].length === 0) {
+                    setLine(i);
+                    break;
+                }
+            }
+        });
+    }
 
     const handleClick = (dataKey) => {
         document.getElementById('button_enter').style.backgroundColor = cssVar("--button-color");
@@ -85,6 +101,11 @@ export function Letters({rightWord}) {
                     const newState = state[line].slice(0, -1);
                     setState({...state, [line]: newState});
                 }
+                for (let i = 0; i < 5; i++) {
+                    let itemStyle = document.getElementById(`item_${line}_${i + 1}`).style;
+                    itemStyle.color = '#fff';
+                    itemStyle.backgroundColor = keyColor;
+                }
                 break;
             }
             case 'enter': {
@@ -92,40 +113,53 @@ export function Letters({rightWord}) {
                     console.log('Недостаточно букв');
                 } else {
                     const userWord = state[line];
-                    let correctLetters = 0;
-                    for (let i = 0; i < userWord.length; i++) {
-                        for (let j = 0; j < userWord.length; j++) {
-                            if (userWord[i] === rightWord[j]) {
-                                let itemStyle = document.getElementById(`item_${line}_${i + 1}`).style;
-                                let buttonStyle = document.getElementById(`button_${userWord[i]}`).style;
 
-                                if (itemStyle.backgroundColor !== 'green') {
-                                    itemStyle.backgroundColor = '#FFB74D';
+                    checkWord(userWord.join('')).then(
+                        isTrueWord => {
+                            let correctLetters = 0;
+                            for (let i = 0; i < userWord.length; i++) {
+                                for (let j = 0; j < userWord.length; j++) {
+                                    if (userWord[i] === rightWord[j]) {
+                                        let itemStyle = document.getElementById(`item_${line}_${i + 1}`).style;
+                                        let buttonStyle = document.getElementById(`button_${userWord[i]}`).style;
+
+                                        if (itemStyle.backgroundColor !== 'green') {
+                                            itemStyle.backgroundColor = '#FFB74D';
+                                        }
+                                        if (buttonStyle.backgroundColor !== 'green') {
+                                            buttonStyle.backgroundColor = '#FFB74D';
+                                        }
+                                        itemStyle.color = '#fff';
+                                        buttonStyle.color = '#fff';
+                                    }
+                                    if (!isTrueWord) {
+                                        let itemStyle = document.getElementById(`item_${line}_${i + 1}`).style;
+                                        itemStyle.color = '#fff';
+                                        itemStyle.backgroundColor = 'red';
+                                    }
                                 }
-                                if (buttonStyle.backgroundColor !== 'green') {
-                                    buttonStyle.backgroundColor = '#FFB74D';
+                                if (userWord[i] === rightWord[i]) {
+                                    let itemStyle = document.getElementById(`item_${line}_${i + 1}`).style;
+                                    let buttonStyle = document.getElementById(`button_${userWord[i]}`).style;
+                                    if (itemStyle.backgroundColor !== 'red') {
+                                        itemStyle.backgroundColor = 'green';
+                                    }
+                                    itemStyle.color = '#fff';
+                                    buttonStyle.backgroundColor = 'green';
+                                    buttonStyle.color = '#fff';
+                                    correctLetters = correctLetters + 1
                                 }
-                                itemStyle.color = '#fff';
-                                buttonStyle.color = '#fff';
                             }
-                        }
-                        if (userWord[i] === rightWord[i]) {
-                            let itemStyle = document.getElementById(`item_${line}_${i + 1}`).style;
-                            let buttonStyle = document.getElementById(`button_${userWord[i]}`).style;
-                            itemStyle.backgroundColor = 'green';
-                            itemStyle.color = '#fff';
-                            buttonStyle.backgroundColor = 'green';
-                            buttonStyle.color = '#fff';
-                            correctLetters = correctLetters + 1
-                        }
-                    }
-                    if (correctLetters === 5) {
-                        tg.HapticFeedback.notificationOccurred("success");
-                        setLine(1);
-                    } else {
-                        tg.HapticFeedback.notificationOccurred("error");
-                        setLine(line + 1);
-                    }
+                            if (!isTrueWord) {
+                                tg.HapticFeedback.notificationOccurred("error");
+                            } else if (correctLetters === 5) {
+                                tg.HapticFeedback.notificationOccurred("success");
+                                setLine(1);
+                            } else {
+                                tg.HapticFeedback.notificationOccurred("error");
+                                setLine(line + 1);
+                            }
+                        });
                 }
                 break;
             }
@@ -190,7 +224,7 @@ export function Letters({rightWord}) {
                 bottom: 70,
                 marginLeft: "-12px",
                 marginRight: "22px",
-                padding: "0px"
+                padding: "0px",
             }}>
                 <Grid container spacing={1}>
                     {keys.map((item) => (
@@ -200,7 +234,7 @@ export function Letters({rightWord}) {
                                 key={item.id}
                                 sx={{
                                     backgroundColor: keyColor, color: keyTextColor,
-                                    height: "30px", minWidth: "24px", fontSize: 10,
+                                    height: "31px", minWidth: "26px", fontSize: 10,
                                     fontWeight: "bold"
                                 }}
                                 onClick={() => handleClick(item.attribute)}

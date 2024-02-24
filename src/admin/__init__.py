@@ -34,5 +34,5 @@ def init_admin_panel(app: typing.Any, engine: typing.Any) -> None:
         debug=False,
     )
 
-    admin_views.add_view(WordsAdmin)
     admin_views.add_view(UsersAdmin)
+    admin_views.add_view(WordsAdmin)

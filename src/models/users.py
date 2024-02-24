@@ -7,10 +7,8 @@ from sqlalchemy.orm import Mapped, relationship
 
 from models._absctract import UserBase
 
-from models.user_word_m2m import user_word_m2m
-
 if typing.TYPE_CHECKING:
-    from models import Words
+    from models import UserWords
 
 
 class Users(UserBase):
@@ -20,7 +18,7 @@ class Users(UserBase):
     allows_write_to_pm = Column(Boolean, default=True, doc='Разрешил ли юзер отправку ему сообщений?')
     is_admin = Column(Boolean, default=False, doc='Является ли юзер админом (для кнопок в боте)')
 
-    words: Mapped[set[Words]] = relationship(back_populates='users', secondary=user_word_m2m)
+    words: Mapped[list[UserWords]] = relationship(back_populates='user')
 
     def __str__(self) -> str:
         return self.username
