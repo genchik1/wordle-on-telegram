@@ -9,7 +9,6 @@ import {apiDomain, tgUser} from "../Constants.jsx";
 
 export function Game() {
     let tg = window.Telegram.WebApp;
-    tg.setBackgroundColor('secondary_bg_color');
     if (tg.colorScheme === "light") {
         tg.setHeaderColor(cssVar("--button-color"));
     }
@@ -31,7 +30,6 @@ export function Game() {
         allows_write_to_pm: tg.initDataUnsafe.user.allows_write_to_pm,
         utm: '',
     })
-
 
     return <Box>
         <Title/>
