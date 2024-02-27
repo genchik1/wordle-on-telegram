@@ -1,5 +1,4 @@
 from sqlalchemy import select, func, update
-from sqlalchemy.orm import load_only
 from datetime import datetime
 from models import Words, UserWords
 

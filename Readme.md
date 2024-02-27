@@ -8,7 +8,6 @@
 - [@QuickStandBot](https://t.me/QuickStandBot) - LMS-платформа для создания и просмотра онлайн-курсов
 - [@SpecialistlyBot](https://t.me/SpecialistlyBot) - Сервис для онлайн-записи
 
----
 
 ### Стек
 
@@ -23,7 +22,6 @@
 
 Документация [Telegram Mini Apps](https://core.telegram.org/bots/webapps)
 
----
 
 ### Локальный запуск
 

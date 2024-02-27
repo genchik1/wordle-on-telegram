@@ -7,10 +7,10 @@ from methods.words import get_today_word_method, check_word_method, save_word
 from querysets.words import get_user_word_m2m_qs
 from settings.db import get_async_session
 
-words_router = APIRouter()
+words_router = APIRouter(prefix='/api/words', tags=['API'])
 
 
-@words_router.get('/api/words/today', tags=['API'], summary='Получение сегодняшнего слова')
+@words_router.get('/today', summary='Получение сегодняшнего слова')
 async def get_today_word(
     session: AsyncSession = Depends(get_async_session),  # noqa: B008
 ) -> str:
@@ -18,8 +18,7 @@ async def get_today_word(
 
 
 @words_router.get(
-    '/api/words/check',
-    tags=['API'],
+    '/check',
     summary='Проверяем существует ли такое слово и сохраняем все существующие введенные слова.',
 )
 async def check_word(
@@ -34,11 +33,7 @@ async def check_word(
     return is_exists
 
 
-@words_router.get(
-    '/api/words/user',
-    tags=['API'],
-    summary='Получаем список угаданных юзером слов.',
-)
+@words_router.get('/user', summary='Получаем список угаданных юзером слов.')
 async def get_user_words(
     user_id: int,
     session: AsyncSession = Depends(get_async_session),  # noqa: B008
@@ -53,5 +48,4 @@ async def get_user_words(
                 result[index] = instance.words[index - 1]
             except IndexError:
                 pass
-
     return result

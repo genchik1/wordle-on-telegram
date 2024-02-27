@@ -5,6 +5,8 @@ import sys
 from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
 
+from handlers.admin import admin_router
+from handlers.send_message import send_message_router
 from handlers.start import start_router
 from middlewares.session import DbSessionMiddleware
 from settings.base import BOT_TOKEN
@@ -18,7 +20,7 @@ async def main() -> None:
     bot = Bot(BOT_TOKEN, parse_mode=ParseMode.MARKDOWN_V2)
 
     dp = Dispatcher()
-    dp.include_routers(start_router)
+    dp.include_routers(start_router, admin_router, send_message_router)
 
     dp.update.middleware(DbSessionMiddleware(session_pool=async_session))
     await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
