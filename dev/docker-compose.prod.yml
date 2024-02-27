@@ -63,5 +63,17 @@ services:
     volumes:
       - /app/node_modules
 
+  sheduler:
+    build:
+      context: ..
+      dockerfile: Dockerfile.prod
+    command: bash -c "python schedule_task.py"
+    container_name: schedule_task
+    restart: unless-stopped
+    environment:
+      - POETRY_GROUP=main
+    env_file:
+      - ../.env.dev
+
 volumes:
   wordle-data:

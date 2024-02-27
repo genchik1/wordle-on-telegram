@@ -45,7 +45,7 @@ async def get_user_words(
 ) -> dict:
     smtm = await session.execute(get_user_word_m2m_qs(user_id))
     instance = smtm.scalar_one_or_none()
-    result = {}
+    result: dict = {}
     for index in range(1, 7):
         result[index] = []
         if instance is not None:

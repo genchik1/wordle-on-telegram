@@ -50,5 +50,15 @@ services:
       timeout: 10s
       retries: 5
 
+  sheduler:
+    build: ..
+    command: bash -c "python schedule_task.py"
+    container_name: schedule_task
+    restart: unless-stopped
+    environment:
+      - POETRY_GROUP=main
+    env_file:
+      - ../.env.dev
+
 volumes:
   wordle-data:

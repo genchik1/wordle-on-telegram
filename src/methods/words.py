@@ -6,19 +6,22 @@ from models import UserWords
 from querysets.words import get_today_word_qs, set_today_word_qs, check_word_qs, get_user_word_m2m_qs, add_word_qs
 
 
-async def _create_today_word(session: AsyncSession) -> None:
-    await session.execute(set_today_word_qs())
+async def create_today_word(session: AsyncSession) -> str | None:
+    """Заменяем слово дня"""
+    word = None
+    for queryset in set_today_word_qs():
+        word = await session.execute(queryset)
     await session.commit()
+    if word is not None:
+        return word.scalar_one_or_none()
+    return None
 
 
 async def get_today_word_method(session: AsyncSession) -> str:
+    """Возвращаем слово дня"""
     smtm = await session.execute(get_today_word_qs())
     word = smtm.scalar_one_or_none()
-    if not word:
-        await _create_today_word(session)
-        smtm = await session.execute(get_today_word_qs())
-        word = smtm.scalar_one_or_none()
-    return word.word
+    return word
 
 
 async def check_word_method(session: AsyncSession, word: str) -> bool:
