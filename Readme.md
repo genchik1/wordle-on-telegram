@@ -14,7 +14,6 @@
 - [@QuickStandBot](https://t.me/QuickStandBot) - LMS-платформа для создания и просмотра онлайн-курсов
 - [@SpecialistlyBot](https://t.me/SpecialistlyBot) - Сервис для онлайн-записи
 
----
 
 ## Бэкенд
 Python3.11 (Fastapi, Sqladmin), Postgresql (Asyncpg + Sqlalchemy + Alembic), Aiogram
@@ -30,7 +29,6 @@ React + Vite, MUI
 
 Фронтендер из меня так себе, так что за код пояснять не буду
 
----
 
 ## Локальный запуск
 
