@@ -16,15 +16,21 @@
 
 ---
 
-## Стек
-
-- Backend: Python3.11 (Fastapi, Sqladmin), Postgresql (Asyncpg + Sqlalchemy + Alembic), Aiogram
-- Frontend: React + Vite, MUI
-- Docker
+## Бэкенд
+Python3.11 (Fastapi, Sqladmin), Postgresql (Asyncpg + Sqlalchemy + Alembic), Aiogram
 
 
+
+## Фронтенд
+React + Vite, MUI
+
+Фронтенд написан на React js с использованием библиотеки [MUI (material ui)](https://mui.com/material-ui/getting-started/), т.к. считаю, что его стиль
+из коробки очень хорошо смотрится в рамках Telegram.
 Документация [Telegram Mini Apps](https://core.telegram.org/bots/webapps)
 
+Фронтендер из меня так себе, так что за код пояснять не буду
+
+---
 
 ## Локальный запуск
 
@@ -44,14 +50,3 @@
 
 - HASH_PASSWORD - `echo -n <password><salt> | md5sum`
 - SECRET_KEY - `openssl rand -hex 32`
-
-
-## Фронтенд
-
-Фронтенд написан на React js с использованием библиотеки [MUI (material ui)](https://mui.com/material-ui/getting-started/), т.к. считаю, что его стиль
-из коробки очень хорошо смотрится в рамках Telegram.
-Для инициализации приложения 
-
-Фронтендер из меня так себе, так что за код пояснять не буду
-
-## Бэкенд
