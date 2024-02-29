@@ -32,13 +32,13 @@ async def check_word_method(session: AsyncSession, word: str) -> bool:
     return True
 
 
-async def save_word(session: AsyncSession, user_id: int, word: str, is_guessed: bool) -> None:
+async def save_word(session: AsyncSession, user_id: int, word: str, today_word: str) -> None:
     smtm = await session.execute(get_user_word_m2m_qs(user_id))
     instance = smtm.scalar_one_or_none()
     if instance is None:
-        m2m = UserWords(user_id=user_id, day=datetime.now(), is_guessed=is_guessed, words=[word])
+        m2m = UserWords(user_id=user_id, today_word=today_word, is_guessed=word == today_word, words=[word])
         session.add(m2m)
     else:
         instance.words.append(word)
-        await session.execute(add_word_qs(instance.id, instance.words, is_guessed))
+        await session.execute(add_word_qs(instance.id, instance.words, word == today_word))
     await session.commit()

@@ -1,4 +1,4 @@
-from sqlalchemy import select
+from sqlalchemy import select, func
 from models import Users
 
 
@@ -10,3 +10,8 @@ def get_admin_qs(user_id: int) -> select:
 def get_users_qs() -> select:
     """Список юзеров"""
     return select(Users)
+
+
+def get_count_users_qs() -> select:
+    """Общее кол-во юзеров"""
+    return select(func.count(Users.id))

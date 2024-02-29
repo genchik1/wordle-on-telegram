@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from models import Users
-from querysets.users import get_admin_qs, get_users_qs
+from querysets.users import get_admin_qs, get_users_qs, get_count_users_qs
 
 
 async def insert_user(session: AsyncSession, user_instance: Users) -> None:
@@ -25,3 +25,9 @@ async def get_users(session: AsyncSession) -> list:
     """Получить список всех юзеров"""
     smtm = await session.execute(get_users_qs())
     return smtm.scalars().all()
+
+
+async def get_count_users(session: AsyncSession):
+    """Получить кол-во юзеров"""
+    smtm = await session.execute(get_count_users_qs())
+    return smtm.scalar()

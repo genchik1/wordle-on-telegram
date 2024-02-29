@@ -1,5 +1,4 @@
 from sqlalchemy import select, func, update
-from datetime import datetime
 from models import Words, UserWords
 
 
@@ -28,7 +27,7 @@ def check_word_qs(word: str) -> select:
 
 def get_user_word_m2m_qs(user_id: int) -> select:
     """Получаем список введенных слов юзером за сегодня."""
-    return select(UserWords).where(UserWords.user_id == user_id).where(UserWords.day == datetime.now().date())
+    return select(UserWords).where(UserWords.user_id == user_id).where(UserWords.today_word == get_today_word_qs())
 
 
 def add_word_qs(instance_id: int, words: list[str], is_guessed: bool) -> select:

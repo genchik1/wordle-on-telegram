@@ -108,7 +108,7 @@ export function Letters({rightWord}) {
                 }
                 for (let i = 0; i < 5; i++) {
                     let itemStyle = document.getElementById(`item_${line}_${i + 1}`).style;
-                    itemStyle.color = '#fff';
+                    itemStyle.color = cssVar("--text-color");
                     itemStyle.backgroundColor = keyColor;
                 }
                 break;

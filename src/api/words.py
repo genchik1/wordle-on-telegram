@@ -29,7 +29,7 @@ async def check_word(
 ) -> bool:
     is_exists = await check_word_method(session, word)
     if is_exists:
-        background_tasks.add_task(save_word, session, user_id, word, word == await get_today_word_method(session))
+        background_tasks.add_task(save_word, session, user_id, word, await get_today_word_method(session))
     return is_exists
 
 
@@ -40,7 +40,9 @@ async def get_user_words(
 ) -> dict:
     smtm = await session.execute(get_user_word_m2m_qs(user_id))
     instance = smtm.scalar_one_or_none()
-    result: dict = {'is_guessed': instance.is_guessed, 'words': {}}
+    result: dict = {'words': {}, 'is_guessed': False}
+    if instance is not None:
+        result['is_guessed'] = instance.is_guessed
     for index in range(1, 7):
         result['words'][index] = []
         if instance is not None:
