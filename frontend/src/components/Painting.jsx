@@ -36,7 +36,7 @@ export const handleClick = (dataKey, state, line, setState, keyColor, rightWord,
                             let buttonStyle = document.getElementById(`button_${userWord[i]}`).style;
                             // Закрашиваем в красный цвет если такого слова не существует в базе
                             if (!isTrueWord) {
-                                itemStyle.color = '#fff';
+                                itemStyle.color = cssVar('--button-text-color');
                                 itemStyle.backgroundColor = 'red';
                             } else {
                                 for (let j = 0; j < userWord.length; j++) {
@@ -48,8 +48,8 @@ export const handleClick = (dataKey, state, line, setState, keyColor, rightWord,
                                         if (buttonStyle.backgroundColor !== 'green') {
                                             buttonStyle.backgroundColor = '#FFB74D';
                                         }
-                                        itemStyle.color = '#fff';
-                                        buttonStyle.color = '#fff';
+                                        itemStyle.color = cssVar('--button-text-color');
+                                        buttonStyle.color = cssVar('--button-text-color');
                                     } else {
                                         // Закрашиваем в серый цвет
                                         if (itemStyle.backgroundColor !== 'green' && itemStyle.backgroundColor !== '#FFB74D') {
@@ -66,9 +66,9 @@ export const handleClick = (dataKey, state, line, setState, keyColor, rightWord,
                                     if (itemStyle.backgroundColor !== 'red') {
                                         itemStyle.backgroundColor = 'green';
                                     }
-                                    itemStyle.color = '#fff';
+                                    itemStyle.color = cssVar('--button-text-color');
                                     buttonStyle.backgroundColor = 'green';
-                                    buttonStyle.color = '#fff';
+                                    buttonStyle.color = cssVar('--button-text-color');
                                     correctLetters = correctLetters + 1
                                 }
                             }
