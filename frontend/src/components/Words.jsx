@@ -9,7 +9,6 @@ import {handleClick} from "./Painting.jsx";
 
 
 export function Words({rightWord}) {
-    let tg = window.Telegram.WebApp;
     const navigate = useNavigate();
     let keyColor = cssVar("--bg-color");
     let keyTextColor = cssVar("--text-color");

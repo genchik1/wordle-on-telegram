@@ -9,6 +9,12 @@ export const handleClick = (dataKey, state, line, setState, keyColor, rightWord,
     document.getElementById('button_backspace').style.backgroundColor = cssVar("--button-color");
     document.getElementById('button_backspace').style.color = cssVar("--button-text-color");
 
+    let newTextColor = keyColor;
+
+    if (tg.colorScheme === "dark") {
+        newTextColor = '#212121';
+    }
+
     switch (dataKey) {
         case 'backspace': {
             if (state[line].length > 0) {
@@ -36,7 +42,7 @@ export const handleClick = (dataKey, state, line, setState, keyColor, rightWord,
                             let buttonStyle = document.getElementById(`button_${userWord[i]}`).style;
                             // Закрашиваем в красный цвет если такого слова не существует в базе
                             if (!isTrueWord) {
-                                itemStyle.color = cssVar('--button-text-color');
+                                itemStyle.color = newTextColor;
                                 itemStyle.backgroundColor = 'red';
                             } else {
                                 for (let j = 0; j < userWord.length; j++) {
@@ -48,15 +54,15 @@ export const handleClick = (dataKey, state, line, setState, keyColor, rightWord,
                                         if (buttonStyle.backgroundColor !== 'green') {
                                             buttonStyle.backgroundColor = '#FFB74D';
                                         }
-                                        itemStyle.color = cssVar('--button-text-color');
-                                        buttonStyle.color = cssVar('--button-text-color');
+                                        itemStyle.color = newTextColor;
+                                        buttonStyle.color = newTextColor;
                                     } else {
                                         // Закрашиваем в серый цвет
                                         if (itemStyle.backgroundColor !== 'green' && itemStyle.backgroundColor !== '#FFB74D') {
-                                            itemStyle.backgroundColor = '#ECEFF1';
+                                            itemStyle.backgroundColor = '#90A4AE';
                                         }
                                         if (buttonStyle.backgroundColor !== 'green' && buttonStyle.backgroundColor !== '#FFB74D') {
-                                            buttonStyle.backgroundColor = '#ECEFF1';
+                                            buttonStyle.backgroundColor = '#90A4AE';
                                         }
                                     }
 
@@ -66,9 +72,9 @@ export const handleClick = (dataKey, state, line, setState, keyColor, rightWord,
                                     if (itemStyle.backgroundColor !== 'red') {
                                         itemStyle.backgroundColor = 'green';
                                     }
-                                    itemStyle.color = cssVar('--button-text-color');
+                                    itemStyle.color = newTextColor;
                                     buttonStyle.backgroundColor = 'green';
-                                    buttonStyle.color = cssVar('--button-text-color');
+                                    buttonStyle.color = newTextColor;
                                     correctLetters = correctLetters + 1
                                 }
                             }
