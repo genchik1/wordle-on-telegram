@@ -16,9 +16,10 @@ class UUIDBaseMixin:
     )
 
 
-class DatetimeBaseMixin:
+class DatetimeBaseMixin(Base):
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
     modified_at = Column(DateTime, default=datetime.datetime.utcnow, onupdate=datetime.datetime.utcnow)
+    __abstract__ = True
 
 
 class UserBase(DatetimeBaseMixin, Base):
