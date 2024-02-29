@@ -9,12 +9,6 @@ export const handleClick = (dataKey, state, line, setState, keyColor, rightWord,
     document.getElementById('button_backspace').style.backgroundColor = cssVar("--button-color");
     document.getElementById('button_backspace').style.color = cssVar("--button-text-color");
 
-    let newTextColor = keyColor;
-
-    if (tg.colorScheme === "dark") {
-        newTextColor = '#212121';
-    }
-
     switch (dataKey) {
         case 'backspace': {
             if (state[line].length > 0) {
@@ -42,7 +36,7 @@ export const handleClick = (dataKey, state, line, setState, keyColor, rightWord,
                             let buttonStyle = document.getElementById(`button_${userWord[i]}`).style;
                             // Закрашиваем в красный цвет если такого слова не существует в базе
                             if (!isTrueWord) {
-                                itemStyle.color = newTextColor;
+                                itemStyle.color = '#fff';
                                 itemStyle.backgroundColor = 'red';
                             } else {
                                 for (let j = 0; j < userWord.length; j++) {
@@ -54,8 +48,8 @@ export const handleClick = (dataKey, state, line, setState, keyColor, rightWord,
                                         if (buttonStyle.backgroundColor !== 'green') {
                                             buttonStyle.backgroundColor = '#FFB74D';
                                         }
-                                        itemStyle.color = newTextColor;
-                                        buttonStyle.color = newTextColor;
+                                        itemStyle.color = '#fff';
+                                        buttonStyle.color = '#fff';
                                     } else {
                                         // Закрашиваем в серый цвет
                                         if (itemStyle.backgroundColor !== 'green' && itemStyle.backgroundColor !== '#FFB74D') {
@@ -72,9 +66,9 @@ export const handleClick = (dataKey, state, line, setState, keyColor, rightWord,
                                     if (itemStyle.backgroundColor !== 'red') {
                                         itemStyle.backgroundColor = 'green';
                                     }
-                                    itemStyle.color = newTextColor;
+                                    itemStyle.color = '#fff';
                                     buttonStyle.backgroundColor = 'green';
-                                    buttonStyle.color = newTextColor;
+                                    buttonStyle.color = '#fff';
                                     correctLetters = correctLetters + 1
                                 }
                             }
