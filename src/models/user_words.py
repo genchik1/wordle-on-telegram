@@ -2,17 +2,18 @@ from __future__ import annotations
 
 import typing
 
-from sqlalchemy import ForeignKey, Column, Boolean, Date, Index, BigInteger, String
+from sqlalchemy import ForeignKey, Column, Boolean, Index, BigInteger, String
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import relationship, Mapped
 
+from models._absctract import DatetimeBaseMixin
 from settings.db import Base
 
 if typing.TYPE_CHECKING:
     from models import Users
 
 
-class UserWords(Base):
+class UserWords(DatetimeBaseMixin, Base):
     """Ассоциативная таблица для связи угаданных юзером слов."""
 
     __tablename__ = 'user_words'

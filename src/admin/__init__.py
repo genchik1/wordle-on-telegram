@@ -3,6 +3,7 @@ from fastapi import Request
 from sqladmin import Admin
 from sqladmin.authentication import AuthenticationBackend
 
+from admin.user_words import UserWordsAdmin
 from admin.users import UsersAdmin
 from admin.words import WordsAdmin
 from settings.base import AUTH_TOKEN
@@ -36,3 +37,4 @@ def init_admin_panel(app: typing.Any, engine: typing.Any) -> None:
 
     admin_views.add_view(UsersAdmin)
     admin_views.add_view(WordsAdmin)
+    admin_views.add_view(UserWordsAdmin)

@@ -14,4 +14,4 @@ class WordsAdmin(ModelView, model=Words):  # type: ignore
     ]
     page_size = 25
     page_size_options = [50, 100]
-    column_sortable_list = [Words.is_today]
+    column_sortable_list = [Words.is_today, Words.is_used]

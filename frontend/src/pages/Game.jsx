@@ -1,5 +1,5 @@
 import {Box} from "@mui/material";
-import {Letters} from "../components/Letters.jsx";
+import {Words} from "../components/Words.jsx";
 import {getTodayWord} from "../api/WordsAPI.jsx";
 import {useQuery} from "@tanstack/react-query";
 import {Title} from "../components/Title.jsx";
@@ -34,6 +34,6 @@ export function Game() {
 
     return <Box>
         <Title/>
-        {!isPending && <Letters rightWord={data}/>}
+        {!isPending && <Words rightWord={data}/>}
     </Box>
 }
