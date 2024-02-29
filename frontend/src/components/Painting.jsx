@@ -1,8 +1,10 @@
 import {cssVar} from "../utils.js";
 import {checkWord} from "../api/WordsAPI.jsx";
+import {useNavigate} from "react-router-dom";
 
 export const handleClick = (dataKey, state, line, setState, keyColor, rightWord, setLine) => {
     let tg = window.Telegram.WebApp;
+    const navigate = useNavigate();
     document.getElementById('button_enter').style.backgroundColor = cssVar("--button-color");
     document.getElementById('button_enter').style.color = cssVar("--button-text-color");
     document.getElementById('button_enter').style.width = "58px";
@@ -34,9 +36,9 @@ export const handleClick = (dataKey, state, line, setState, keyColor, rightWord,
                         for (let i = 0; i < userWord.length; i++) {
                             let itemStyle = document.getElementById(`item_${line}_${i + 1}`).style;
                             let buttonStyle = document.getElementById(`button_${userWord[i]}`).style;
+                            itemStyle.color = '#fff';
                             // Закрашиваем в красный цвет если такого слова не существует в базе
                             if (!isTrueWord) {
-                                itemStyle.color = '#fff';
                                 itemStyle.backgroundColor = 'red';
                             } else {
                                 for (let j = 0; j < userWord.length; j++) {
@@ -48,7 +50,6 @@ export const handleClick = (dataKey, state, line, setState, keyColor, rightWord,
                                         if (buttonStyle.backgroundColor !== 'green') {
                                             buttonStyle.backgroundColor = '#FFB74D';
                                         }
-                                        itemStyle.color = '#fff';
                                         buttonStyle.color = '#fff';
                                     } else {
                                         // Закрашиваем в серый цвет
@@ -57,6 +58,7 @@ export const handleClick = (dataKey, state, line, setState, keyColor, rightWord,
                                         }
                                         if (buttonStyle.backgroundColor !== 'green' && buttonStyle.backgroundColor !== '#FFB74D') {
                                             buttonStyle.backgroundColor = '#90A4AE';
+                                            buttonStyle.color = '#fff';
                                         }
                                     }
 
@@ -66,7 +68,6 @@ export const handleClick = (dataKey, state, line, setState, keyColor, rightWord,
                                     if (itemStyle.backgroundColor !== 'red') {
                                         itemStyle.backgroundColor = 'green';
                                     }
-                                    itemStyle.color = '#fff';
                                     buttonStyle.backgroundColor = 'green';
                                     buttonStyle.color = '#fff';
                                     correctLetters = correctLetters + 1
