@@ -32,7 +32,7 @@ async def admin_menu(message: Message, session: AsyncSession, state: FSMContext)
     await state.clear()
     user_id = message.from_user.id
     if await is_admin(session=session, user_id=user_id):
-        text = 'Вам доступно следующее:\n- Отправка сообщения всем пользователям бота\n- Просмотр статистики'
+        text = 'Вам доступно следующее:\n\n- Отправка сообщения всем пользователям\n- Просмотр статистики'
         keyboard = [
             {
                 'text': elem.name,

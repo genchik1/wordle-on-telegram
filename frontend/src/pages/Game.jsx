@@ -12,6 +12,7 @@ export function Game() {
     if (tg.colorScheme === "light") {
         tg.setHeaderColor(cssVar("--button-color"));
     }
+    tg.BackButton.hide();
     tg.ready();
     tg.expand();
 
@@ -23,13 +24,13 @@ export function Game() {
     if (isError) {
         return <>Возникла ошибка</>
     }
-
-    axios.post(apiDomain + `/api/user`, {
-        id: tg.initDataUnsafe.user.id,
-        username: tg.initDataUnsafe.user.username,
-        allows_write_to_pm: tg.initDataUnsafe.user.allows_write_to_pm,
-        utm: '',
-    })
+    //
+    // axios.post(apiDomain + `/api/user`, {
+    //     id: tg.initDataUnsafe.user.id,
+    //     username: tg.initDataUnsafe.user.username,
+    //     allows_write_to_pm: tg.initDataUnsafe.user.allows_write_to_pm,
+    //     utm: '',
+    // })
 
     return <Box>
         <Title/>

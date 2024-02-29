@@ -3,6 +3,7 @@ import {Box, Button, Grid, Typography} from "@mui/material";
 import {useState} from "react";
 import {keys} from "../data/keys.js";
 import {checkWord, getUserWords} from "../api/WordsAPI.jsx";
+import {useNavigate} from "react-router-dom";
 
 
 function BoxKey({id, backgroundColor, textColor, child}) {
@@ -61,6 +62,7 @@ function FormRow({backgroundColor, textColor, state, line}) {
 
 export function Letters({rightWord}) {
     let tg = window.Telegram.WebApp;
+    const navigate = useNavigate();
     let keyColor = cssVar("--bg-color");
     let keyTextColor = cssVar("--text-color");
     const [line, setLine] = useState(1)
@@ -76,11 +78,14 @@ export function Letters({rightWord}) {
 
     if (!isGet) {
         getUserWords().then(result => {
-            setState(result);
+            setState(result.words);
             setIsGet(true);
+            if (result.is_guessed) {
+                return navigate('/success');
+            }
             for (let i = 1; i < 7; i++) {
-                console.log(result[i], result[i].length);
-                if (result[i].length === 0) {
+                console.log(result.words[i], result.words[i].length);
+                if (result.words[i].length === 0) {
                     setLine(i);
                     break;
                 }
@@ -155,6 +160,7 @@ export function Letters({rightWord}) {
                             } else if (correctLetters === 5) {
                                 tg.HapticFeedback.notificationOccurred("success");
                                 setLine(1);
+                                return navigate('/success')
                             } else {
                                 tg.HapticFeedback.notificationOccurred("error");
                                 setLine(line + 1);

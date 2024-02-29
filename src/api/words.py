@@ -40,12 +40,12 @@ async def get_user_words(
 ) -> dict:
     smtm = await session.execute(get_user_word_m2m_qs(user_id))
     instance = smtm.scalar_one_or_none()
-    result: dict = {}
+    result: dict = {'is_guessed': instance.is_guessed, 'words': {}}
     for index in range(1, 7):
-        result[index] = []
+        result['words'][index] = []
         if instance is not None:
             try:
-                result[index] = instance.words[index - 1]
+                result['words'][index] = instance.words[index - 1]
             except IndexError:
                 pass
     return result

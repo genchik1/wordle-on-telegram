@@ -7,7 +7,7 @@ from utils import CommandBase
 class AdminCommand:
     admin_start = CommandBase(name='Панель администратора', command='admin')
     admin_menu = CommandBase(name='Меню', command='/admin_menu')
-    send_message = CommandBase(name='Отправить сообщение', callback='send_message_callback')
+    send_message = CommandBase(name='Сообщение', callback='send_message_callback')
     statistic = CommandBase(name='Статистика', callback='statistic')
 
 
