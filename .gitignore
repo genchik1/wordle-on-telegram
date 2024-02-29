@@ -160,4 +160,4 @@ cython_debug/
 .idea/
 
 frontend/node_modules
-.ruff_cache/
+.ruff_cache/.idea
