@@ -23,7 +23,7 @@ export function Success() {
     return <Box>
         <CardContent sx={{color: cssVar("--text-color")}}>
             <Typography variant='h6'>🎉 Ура! Вы угадали слово!</Typography>
-            <Typography variant='caption'>Новое слово в 9 утра по мск.</Typography>
+            <Typography variant='caption'>Новое слово в 11 утра по мск.</Typography>
         </CardContent>
         <CardMedia sx={{borderRadius: "10px", maxHeight: "500px"}} component="img" image={`./${randomNumber}.gif`} alt="img"/>
     </Box>

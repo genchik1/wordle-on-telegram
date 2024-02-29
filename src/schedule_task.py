@@ -22,7 +22,7 @@ def main():
 
 
 # schedule.every(1).minute.do(main)
-schedule.every().day.at('9:00', 'Europe/Moscow').do(main)
+schedule.every().day.at('11:00', 'Europe/Moscow').do(main)
 
 while True:
     schedule.run_pending()
