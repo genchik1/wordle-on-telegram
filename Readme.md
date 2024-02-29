@@ -1,29 +1,32 @@
-# 5 БУКВ (Wordle) в телеграм
+<p align="center">
+  <img src="title.png" alt="Wordle"/>
+</p>
+<p align="center">
+    <em>Реализация игры "5БУКВ" (Wordle) в Telegram на технологии Webapps.</em>
+</p>
 
+---
 Проект был создан, чтобы быть шаблоном для быстрого создания сервисов в телеграм с использованием webapp.
 
-🧩 Игра: https://t.me/wordle_ru_game_bot
+🧩 Играть: https://t.me/wordle_ru_game_bot
 
 Другие проекты:
 - [@QuickStandBot](https://t.me/QuickStandBot) - LMS-платформа для создания и просмотра онлайн-курсов
 - [@SpecialistlyBot](https://t.me/SpecialistlyBot) - Сервис для онлайн-записи
 
+---
 
-### Стек
+## Стек
 
-- Backend
-  - Python3.11 (Fastapi, Sqladmin)
-  - Postgresql (Asyncpg + Sqlalchemy + Alembic)
-  - Aiogram
-- Frontend
-  - React + Vite
+- Backend: Python3.11 (Fastapi, Sqladmin), Postgresql (Asyncpg + Sqlalchemy + Alembic), Aiogram
+- Frontend: React + Vite, MUI
 - Docker
 
 
 Документация [Telegram Mini Apps](https://core.telegram.org/bots/webapps)
 
 
-### Локальный запуск
+## Локальный запуск
 
 - Локальный запуск проекта `make run`
 - Далее необходимо создать базу данных:
@@ -41,3 +44,14 @@
 
 - HASH_PASSWORD - `echo -n <password><salt> | md5sum`
 - SECRET_KEY - `openssl rand -hex 32`
+
+
+## Фронтенд
+
+Фронтенд написан на React js с использованием библиотеки [MUI (material ui)](https://mui.com/material-ui/getting-started/), т.к. считаю, что его стиль
+из коробки очень хорошо смотрится в рамках Telegram.
+Для инициализации приложения 
+
+Фронтендер из меня так себе, так что за код пояснять не буду
+
+## Бэкенд
