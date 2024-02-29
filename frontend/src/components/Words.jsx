@@ -75,7 +75,7 @@ export function Words({rightWord}) {
                                     height: "31px", minWidth: "26px", fontSize: 10,
                                     fontWeight: "bold"
                                 }}
-                                onClick={() => handleClick(item.attribute, state, line, setState, keyColor, rightWord, setLine)}
+                                onClick={() => handleClick(item.attribute, state, line, setState, keyColor, rightWord, setLine, navigate)}
                             >
                                 {item.text}
                             </Button>

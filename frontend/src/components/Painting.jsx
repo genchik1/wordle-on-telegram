@@ -1,10 +1,8 @@
 import {cssVar} from "../utils.js";
 import {checkWord} from "../api/WordsAPI.jsx";
-import {useNavigate} from "react-router-dom";
 
-export const handleClick = (dataKey, state, line, setState, keyColor, rightWord, setLine) => {
+export const handleClick = (dataKey, state, line, setState, keyColor, rightWord, setLine, navigate) => {
     let tg = window.Telegram.WebApp;
-    const navigate = useNavigate();
     document.getElementById('button_enter').style.backgroundColor = cssVar("--button-color");
     document.getElementById('button_enter').style.color = cssVar("--button-text-color");
     document.getElementById('button_enter').style.width = "58px";
