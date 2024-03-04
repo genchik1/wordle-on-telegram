@@ -73,7 +73,7 @@ services:
     environment:
       - POETRY_GROUP=main
     env_file:
-      - ../.env.dev
+      - ../.env
 
 volumes:
   wordle-data:
